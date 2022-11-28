@@ -1,0 +1,16 @@
+name: 'Push-Action'
+description: "Push changes made in the runner's workspace to Github using Powershell"
+
+runs:
+  using: "composite"
+  steps:
+      - name: Push changes to Github
+        shell: pwsh
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add --all .
+          git commit -m "$([datetime]::Today.ToString('MM-dd-yy'))"
+          git push
+
+
